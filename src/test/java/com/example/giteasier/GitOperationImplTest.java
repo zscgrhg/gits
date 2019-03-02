@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class GitOperationImplTest {
     @Test
-    public void testClone(){
-        GitOperationImpl gitOperation=new GitOperationImpl();
-        Repository abc = new RepositoryImpl().setName("abcdef")
+    public void testClone() {
+        GitOperationImpl gitOperation = new GitOperationImpl();
+        Repository abc = new RepositoryImpl().setName("aaas")
                 .setRepository("git@github.com:zscgrhg/mybatis-plugin.git");
         Git git = gitOperation.gitClone(abc);
-        gitOperation.gitBranchPush(git,abc,"origin/master:refs/heads/v1.1.1");
+        gitOperation.gitBranchPush(git, "origin/master", "refs/heads/v1.1.4");
     }
 }

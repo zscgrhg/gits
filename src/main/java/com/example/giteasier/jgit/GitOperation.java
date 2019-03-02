@@ -6,7 +6,7 @@ import org.eclipse.jgit.api.Git;
 public interface GitOperation {
     Git gitClone(Repository repository);
 
-    void gitCheckout(Git git,Repository repository, String branchName);
+    void gitCheckout(Git git,String start,String branchName);
 
-    void gitBranchPush(Git git,Repository repository,String refSpec);
+    void gitBranchPush(Git git,String source,String dest);
 }

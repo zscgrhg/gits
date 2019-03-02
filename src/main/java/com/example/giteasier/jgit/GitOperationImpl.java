@@ -7,7 +7,6 @@ import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.transport.RefSpec;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 public class GitOperationImpl implements GitOperation {
     public static final File workspace = new File("./workspace");
@@ -38,22 +37,22 @@ public class GitOperationImpl implements GitOperation {
 
     @Override
     @SneakyThrows
-    public void gitCheckout(Git git,Repository repository, String branchName) {
+    public void gitCheckout(Git git, String start, String branchName) {
 
         git.checkout()
                 .setCreateBranch(true)
                 .setName(branchName)
-                .setStartPoint("origin/"+branchName)
+                .setStartPoint(start)
                 .call();
     }
 
     @Override
     @SneakyThrows
-    public void gitBranchPush(Git git,Repository repository, String refSpec) {
+    public void gitBranchPush(Git git, String source, String dest) {
         PushCommand pushCommand = git.push();
         pushCommand.setTransportConfigCallback(SshTransportConfigCallback.INSTANCE);
         pushCommand.setRemote("origin");
-        pushCommand.setRefSpecs(new RefSpec(refSpec));
+        pushCommand.setRefSpecs(new RefSpec().setSourceDestination(source, dest));
         pushCommand.call();
     }
 }
